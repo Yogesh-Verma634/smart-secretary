@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/Record"
-        android:layout_marginEnd="50dp"
+        android:layout_marginEnd="93dp"
         android:clickable="true"
         app:srcCompat="@android:drawable/ic_menu_send" />
 
@@ -40,6 +40,16 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:autoSizeTextType="uniform" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/Summarize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/Record"
+        android:layout_marginEnd="27dp"
+        android:clickable="true"
+        app:srcCompat="@android:drawable/checkbox_on_background" />
     <!---->
     <!--android:layout_width="wrap_content"-->
     <!--android:layout_height="wrap_content"-->

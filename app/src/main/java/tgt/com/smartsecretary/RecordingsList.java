@@ -1,5 +1,6 @@
 package tgt.com.smartsecretary;
 
+import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -9,6 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.chaquo.python.PyObject;
+import com.chaquo.python.Python;
+import com.chaquo.python.android.AndroidPlatform;
 import com.google.auth.oauth2.GoogleCredentials;
 
 import java.io.IOException;
@@ -22,11 +26,9 @@ public class RecordingsList extends AppCompatActivity {
 
     private static final String FILENAME = Environment.getExternalStorageDirectory().getAbsolutePath() + "smart-secretary/transcript.txt";
 
-    public RecordingsList() {
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        runPython(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (android.os.Build.VERSION.SDK_INT > 9)
@@ -72,23 +74,28 @@ public class RecordingsList extends AppCompatActivity {
                     catch (IOException e) { e.printStackTrace(); }
 
                     results = transcriptionService.transcribe(credential);
-//                    Process p = Runtime.getRuntime().exec("/Users/z00295r/anaconda/bin/python", "");
                     view.setText(results);
                 } catch (Exception e) { e.printStackTrace(); }
             }
         });
+
+        //SUMMARIZE
+        final FloatingActionButton summarize = (FloatingActionButton) findViewById(R.id.Summarize);
+        summarize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Python python = Python.getInstance();
+                PyObject pyObject = python.getModule("Summarize");
+                PyObject summarize = pyObject.get("Summarize");
+                summarize.call();
+            }
+        });
+
     }
 
-
-//    //SUMMARIZE
-//    final
-
-
-    /*
     private void runPython(Context context){
         if(!Python.isStarted()) {
             Python.start(new AndroidPlatform(context));
         }
     }
-    */
 }
