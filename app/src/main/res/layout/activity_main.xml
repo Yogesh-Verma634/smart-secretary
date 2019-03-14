@@ -50,8 +50,5 @@
         android:layout_marginEnd="27dp"
         android:clickable="true"
         app:srcCompat="@android:drawable/checkbox_on_background" />
-    <!---->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="TextView" />-->
+
 </RelativeLayout>

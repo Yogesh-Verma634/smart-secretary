@@ -1,18 +1,8 @@
 package tgt.com.smartsecretary;
 
-import android.media.AudioFormat;
-import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.os.Environment;
 import android.util.Log;
-
-import com.google.cloud.speech.v1p1beta1.RecognitionMetadata;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 /**
  * A sample program is to demonstrate how to record sound in Java
@@ -20,21 +10,19 @@ import java.io.IOException;
  */
 public class RecordService {
 
-    private MediaRecorder mediaRecorder = new MediaRecorder();
+    private MediaRecorder mediaRecorder = null;
     private String outputFile = Environment.getExternalStorageDirectory().
-            getAbsolutePath();
-
-    AudioRecord audioRecord = null;
-    private Thread recordingThread = null;
+            getAbsolutePath() + "/sample.wav";
     // record duration, in milliseconds
     public void startRecording() {
+        mediaRecorder = new MediaRecorder();
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_NB);
         mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
         mediaRecorder.setOutputFile(outputFile);
-
         try {
             mediaRecorder.prepare();
+            System.out.println("media prepared");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -44,6 +32,7 @@ public class RecordService {
     public void stopRecording(){
         mediaRecorder.stop();
         mediaRecorder.release();
+        mediaRecorder = null;
         Log.i("RecordTest", "Stopped Recording");
     }
 

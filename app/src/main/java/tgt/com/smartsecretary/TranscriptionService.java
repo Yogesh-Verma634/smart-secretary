@@ -1,7 +1,6 @@
 package tgt.com.smartsecretary;
 
 import android.os.Environment;
-import android.widget.LinearLayout;
 
 import com.google.api.gax.core.FixedCredentialsProvider;
 import com.google.auth.oauth2.GoogleCredentials;
@@ -20,8 +19,10 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class TranscriptionService {
-    public String transcribe(GoogleCredentials credentials) throws Exception {
 
+    private static final String FILEPATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/smart-secretary";
+
+    public String transcribe(GoogleCredentials credentials) throws Exception {
         FixedCredentialsProvider credentialsProvider = FixedCredentialsProvider.create(credentials);
         SpeechSettings speechSettings =
                 SpeechSettings.newBuilder()

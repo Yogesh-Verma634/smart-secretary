@@ -6,8 +6,12 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.chaquo.python.PyObject;
@@ -15,6 +19,7 @@ import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 import com.google.auth.oauth2.GoogleCredentials;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -23,7 +28,7 @@ public class RecordingsList extends AppCompatActivity {
     private TranscriptionService transcriptionService = new TranscriptionService();
     private RecordService recordService = new RecordService();
     String results = null;
-
+    private static final String FILEPATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/smart-secretary";
     private static final String FILENAME = Environment.getExternalStorageDirectory().getAbsolutePath() + "smart-secretary/transcript.txt";
 
     @Override
@@ -54,7 +59,10 @@ public class RecordingsList extends AppCompatActivity {
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println(getApplicationContext().fileList());
                 recordService.stopRecording();
+                stopRecording();
+
             }
         });
 
@@ -87,15 +95,57 @@ public class RecordingsList extends AppCompatActivity {
                 Python python = Python.getInstance();
                 PyObject pyObject = python.getModule("Summarize");
                 PyObject summarize = pyObject.get("Summarize");
-                summarize.call();
+                PyObject object = summarize.call("");
+
             }
         });
-
     }
 
     private void runPython(Context context){
         if(!Python.isStarted()) {
             Python.start(new AndroidPlatform(context));
         }
+    }
+
+    private void stopRecording(){
+        LayoutInflater li = LayoutInflater.from(this);
+        View promptsView = li.inflate(R.layout.dialogue_box, null);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+        // set prompts.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
+
+        final EditText userInput = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput);
+        Button cancel = (Button) promptsView.findViewById(R.id.save_cancel);
+        Button ok = (Button) promptsView.findViewById(R.id.save_ok);
+
+
+        // set dialog message
+        alertDialogBuilder
+                .setCancelable(false);
+
+        // create alert dialog
+        final AlertDialog alertDialog = alertDialogBuilder.create();
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String newFileName = userInput.getText().toString();
+                if (newFileName != null && newFileName.trim().length() > 0) {
+                    File newFile = new File(FILEPATH, newFileName);
+                    File oldFile = new File(FILEPATH, "Unnamed");
+                    oldFile.renameTo(newFile);
+                    alertDialog.dismiss();
+                }
+            }
+        });
+        // show it
+        alertDialog.show();
+
     }
 }
