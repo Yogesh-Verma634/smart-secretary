@@ -11,10 +11,12 @@ import android.util.Log;
 public class RecordService {
 
     private MediaRecorder mediaRecorder = null;
-    private String outputFile = Environment.getExternalStorageDirectory().
-            getAbsolutePath() + "/sample.wav";
+    private String outputPath = Environment.getExternalStorageDirectory().
+            getAbsolutePath() + "/smart-secretary/";
     // record duration, in milliseconds
-    public void startRecording() {
+    public void startRecording(String filename) {
+        String outputFile = outputPath + filename;
+        System.out.println(outputFile);
         mediaRecorder = new MediaRecorder();
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_NB);
@@ -30,9 +32,11 @@ public class RecordService {
         mediaRecorder.start();
     }
     public void stopRecording(){
-        mediaRecorder.stop();
-        mediaRecorder.release();
-        mediaRecorder = null;
+        if(mediaRecorder!=null) {
+            mediaRecorder.stop();
+            mediaRecorder.release();
+            mediaRecorder = null;
+        }
         Log.i("RecordTest", "Stopped Recording");
     }
 

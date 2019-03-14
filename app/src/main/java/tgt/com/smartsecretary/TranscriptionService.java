@@ -33,7 +33,7 @@ public class TranscriptionService {
         String content = "";
         // The path to the audio file to transcribe
         String fileName = Environment.getExternalStorageDirectory().
-                getAbsolutePath() + "smart-secretary/sample.wav";
+                getAbsolutePath() + "/smart-secretary/sample.wav";
 
         // Reads the audio file into memory
         Path path = Paths.get(fileName);

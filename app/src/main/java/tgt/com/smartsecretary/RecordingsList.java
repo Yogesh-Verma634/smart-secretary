@@ -28,13 +28,18 @@ public class RecordingsList extends AppCompatActivity {
     private TranscriptionService transcriptionService = new TranscriptionService();
     private RecordService recordService = new RecordService();
     String results = null;
-    private static final String FILEPATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "/smart-secretary";
+    private static final String FILEPATH = Environment.getExternalStorageDirectory().getAbsolutePath() + "smart-secretary";
     private static final String FILENAME = Environment.getExternalStorageDirectory().getAbsolutePath() + "smart-secretary/transcript.txt";
+    ViewDialogue viewDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         runPython(this);
+        viewDialog = new ViewDialogue(this);
         super.onCreate(savedInstanceState);
+        File[] files = getExternalFilesDirs(FILEPATH);
+        System.out.println(files);
+
         setContentView(R.layout.activity_main);
         if (android.os.Build.VERSION.SDK_INT > 9)
         {
@@ -50,7 +55,7 @@ public class RecordingsList extends AppCompatActivity {
         record.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                recordService.startRecording();
+                startRecording();
             }
         });
 
@@ -59,10 +64,7 @@ public class RecordingsList extends AppCompatActivity {
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println(getApplicationContext().fileList());
                 recordService.stopRecording();
-                stopRecording();
-
             }
         });
 
@@ -72,7 +74,6 @@ public class RecordingsList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    view.setText("Listening to Audio and Transcribing!!");
                     AssetManager assetManager = getAssets();
                     InputStream jsonStream = null;
                     try { jsonStream = assetManager.open("google_application_credentials.json"); }
@@ -107,7 +108,7 @@ public class RecordingsList extends AppCompatActivity {
         }
     }
 
-    private void stopRecording(){
+    private void startRecording(){
         LayoutInflater li = LayoutInflater.from(this);
         View promptsView = li.inflate(R.layout.dialogue_box, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -136,12 +137,8 @@ public class RecordingsList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String newFileName = userInput.getText().toString();
-                if (newFileName != null && newFileName.trim().length() > 0) {
-                    File newFile = new File(FILEPATH, newFileName);
-                    File oldFile = new File(FILEPATH, "Unnamed");
-                    oldFile.renameTo(newFile);
+                recordService.startRecording(newFileName);
                     alertDialog.dismiss();
-                }
             }
         });
         // show it
