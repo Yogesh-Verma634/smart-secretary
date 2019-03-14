@@ -95,7 +95,6 @@ public class RecordingsList extends AppCompatActivity {
                 Python python = Python.getInstance();
                 PyObject pyObject = python.getModule("Summarize");
                 PyObject summarize = pyObject.get("Summarize");
-                PyObject object = summarize.call("");
 
             }
         });
