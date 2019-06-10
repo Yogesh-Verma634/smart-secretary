@@ -1,4 +1,4 @@
-package tgt.com.smartsecretary.summarize;
+package com.smartsecretary.summarize;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -8,7 +8,6 @@ import java.util.Set;
 /**
  * 
  * Use this class to debug or print extensive information about any data that is stored and processed.  
- * @author Piraveen
  */
 public class DebugClass {
 	private static List<String> lines = SentenceBuilder.getLines();									// Raw lines

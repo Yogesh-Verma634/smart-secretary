@@ -1,11 +1,10 @@
-package tgt.com.smartsecretary.summarize;
+package com.smartsecretary.summarize;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 /**
  * Takes sentenceObjects and splits them into Word-objects. 
- * @author Piraveen
  */
 public class WordBuilder {
 	private static ArrayList<Word> dirtyWordObjects = new ArrayList<Word>();						// Word-objects with stop-words

@@ -1,4 +1,4 @@
-package tgt.com.smartsecretary.summarize;
+package com.smartsecretary.summarize;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -7,7 +7,6 @@ import java.nio.file.Paths;
 import java.util.List;
 /**
  * Responsible for turning raw text into something the application can work with in memory. 
- * @author Piraveen
  *
  */
 public class FileHandler {

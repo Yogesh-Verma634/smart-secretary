@@ -1,4 +1,4 @@
-package tgt.com.smartsecretary;
+package com.smartsecretary;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

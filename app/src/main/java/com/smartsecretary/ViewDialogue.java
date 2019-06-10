@@ -1,4 +1,4 @@
-package tgt.com.smartsecretary;
+package com.smartsecretary;
 
 import android.app.Activity;
 import android.app.Dialog;

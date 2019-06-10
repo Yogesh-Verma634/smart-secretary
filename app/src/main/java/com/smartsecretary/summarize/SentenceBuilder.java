@@ -1,9 +1,8 @@
-package tgt.com.smartsecretary.summarize;
+package com.smartsecretary.summarize;
 import java.util.ArrayList;
 import java.util.List;
 /**
  * Takes lines provided by FileHandler and populates lists with {@link Sentence Sentence}-objects. 
- * @author Piraveen
  *
  */
 public class SentenceBuilder {

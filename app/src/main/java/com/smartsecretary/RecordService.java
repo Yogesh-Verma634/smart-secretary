@@ -1,4 +1,4 @@
-package tgt.com.smartsecretary;
+package com.smartsecretary;
 
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;

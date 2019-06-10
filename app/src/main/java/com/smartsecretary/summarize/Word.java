@@ -1,4 +1,4 @@
-package tgt.com.smartsecretary.summarize;
+package com.smartsecretary.summarize;
 import java.util.ArrayList;
 
 public class Word {

@@ -1,9 +1,8 @@
-package tgt.com.smartsecretary.summarize;
+package com.smartsecretary.summarize;
 import java.util.ArrayList;
 import java.util.Collections;
 /**
  * Final step in which the summary is created. 
- * @author Piraveen
  *
  */
 public class Summarizer {

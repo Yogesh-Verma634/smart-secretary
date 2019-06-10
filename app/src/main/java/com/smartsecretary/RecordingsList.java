@@ -1,4 +1,4 @@
-package tgt.com.smartsecretary;
+package com.smartsecretary;
 
 import android.content.Context;
 import android.content.res.AssetManager;

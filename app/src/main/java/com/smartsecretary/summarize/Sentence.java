@@ -1,4 +1,4 @@
-package tgt.com.smartsecretary.summarize;
+package com.smartsecretary.summarize;
 
 public class Sentence {
 	private String text;

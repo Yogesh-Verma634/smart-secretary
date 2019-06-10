@@ -1,7 +1,6 @@
-package tgt.com.smartsecretary.summarize;
+package com.smartsecretary.summarize;
 
 /**
- * @author Piraveen
  * @version 1.0.0
  */
 public class Main {

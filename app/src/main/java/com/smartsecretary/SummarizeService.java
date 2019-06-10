@@ -1,11 +1,11 @@
-package tgt.com.smartsecretary;
+package com.smartsecretary;
 
 import android.os.Environment;
 
-import tgt.com.smartsecretary.summarize.DebugClass;
-import tgt.com.smartsecretary.summarize.SentenceBuilder;
-import tgt.com.smartsecretary.summarize.Summarizer;
-import tgt.com.smartsecretary.summarize.WordBuilder;
+import com.smartsecretary.summarize.DebugClass;
+import com.smartsecretary.summarize.SentenceBuilder;
+import com.smartsecretary.summarize.Summarizer;
+import com.smartsecretary.summarize.WordBuilder;
 
 public class SummarizeService {
 

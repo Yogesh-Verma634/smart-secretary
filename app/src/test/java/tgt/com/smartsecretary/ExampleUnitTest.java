@@ -1,4 +1,4 @@
-package tgt.com.smartsecretary;
+package com.smartsecretary;
 
 import org.junit.Test;
 
