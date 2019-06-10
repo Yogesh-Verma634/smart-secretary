@@ -1,9 +1,0 @@
-from gensim.summarization import keywords
-from gensim.summarization.summarizer import summarize
-
-class Summarize():
-    print ('Summary: \n')
-#    print (summarize(text , 0.01))
-
-    print ('Summary: \n')
-#    print (keywords(text , 0.01))

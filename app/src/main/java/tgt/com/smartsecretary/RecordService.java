@@ -1,8 +1,11 @@
 package tgt.com.smartsecretary;
 
+import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Environment;
 import android.util.Log;
+
+import java.io.IOException;
 
 /**
  * A sample program is to demonstrate how to record sound in Java
@@ -11,6 +14,7 @@ import android.util.Log;
 public class RecordService {
 
     private MediaRecorder mediaRecorder = null;
+    private MediaPlayer mediaPlayer = null;
     private String outputPath = Environment.getExternalStorageDirectory().
             getAbsolutePath() + "/smart-secretary/";
     // record duration, in milliseconds
@@ -37,8 +41,23 @@ public class RecordService {
             mediaRecorder.release();
             mediaRecorder = null;
         }
+        if(mediaPlayer!=null){
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
         Log.i("RecordTest", "Stopped Recording");
     }
 
 
+    public void play() {
+        String outputFile = outputPath + "sample.wav";
+        mediaPlayer = new MediaPlayer();
+        try {
+            mediaPlayer.setDataSource(outputFile);
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+        } catch (IOException e) {
+            Log.e("MediaPlayer", "prepare() failed");
+        }
+    }
 }

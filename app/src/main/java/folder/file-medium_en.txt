@@ -1,0 +1,2 @@
+welcome to the plural sight course on understanding machine learning with python in this course you learn how to solve problems that are difficult and some might say impossible to solve
+and more traditional programming carefully analyze the problem and write code this code reads and data use its control logic to determine the correct torque sticks cute which then produces the correct result
